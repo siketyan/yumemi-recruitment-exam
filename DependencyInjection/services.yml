@@ -1,0 +1,40 @@
+parameters:
+  number_of_digits: '%env(int:NUMBER_OF_DIGITS)%'
+  number_of_failures_to_dropout: '%env(int:NUMBER_OF_FAILURES_TO_DROPOUT)%'
+  maximum_score_to_failure: '%env(int:MAXIMUM_SCORE_TO_FAILURE)%'
+
+services:
+  Track\Service\Csv\Builder\MeansBuilder:
+    arguments:
+      $numberOfDigits: '%number_of_digits%'
+
+  Track\Service\Csv\Builder\StudentsBuilder: ~
+
+  Track\Service\Csv\Parser\StudentsParser: ~
+
+  Track\Service\Csv\CsvReaderInterface:
+    class: Track\Service\Csv\LeagueCsvReaderWriter
+
+  Track\Service\Csv\CsvWriterInterface:
+    class: Track\Service\Csv\LeagueCsvReaderWriter
+
+  Track\Service\Dropout\Voter\DropoutVoter:
+    arguments:
+      $failureResolver: '@Track\Service\Failure\FailureResolver'
+      $numberOfFailuresToDropout: '%number_of_failures_to_dropout%'
+
+  Track\Service\Dropout\DropoutResolver:
+    arguments:
+      $voters: ['@Track\Service\Dropout\Voter\DropoutVoter']
+
+  Track\Service\Failure\Voter\FailureVoter:
+    arguments:
+      $maximumScoreToFailure: '%maximum_score_to_failure%'
+
+  Track\Service\Failure\FailureResolver:
+    arguments:
+      $voters: ['@Track\Service\Failure\Voter\FailureVoter']
+
+  Track\Service\Mean\MeanCalculator:
+    arguments:
+      $numberOfDigits: '%number_of_digits%'

@@ -1,0 +1,25 @@
+{
+    "type": "project",
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.4",
+        "league/csv": "^9.6",
+        "ray/di": "^2.10",
+        "symfony/config": "^5.1",
+        "symfony/console": "^5.1",
+        "symfony/dependency-injection": "^5.1",
+        "symfony/dotenv": "^5.1",
+        "symfony/yaml": "^5.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Track\\": ""
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

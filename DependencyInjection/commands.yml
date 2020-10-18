@@ -1,0 +1,18 @@
+services:
+  Track\Command\DropoutsCommand:
+    public: true
+    arguments:
+      $useCase: '@Track\UseCase\DropoutsUseCase'
+      $studentsParser: '@Track\Service\Csv\Parser\StudentsParser'
+      $studentsBuilder: '@Track\Service\Csv\Builder\StudentsBuilder'
+      $csvReader: '@Track\Service\Csv\CsvReaderInterface'
+      $csvWriter: '@Track\Service\Csv\CsvWriterInterface'
+
+  Track\Command\TopVsBottomCommand:
+    public: true
+    arguments:
+      $useCase: '@Track\UseCase\TopVsBottomUseCase'
+      $studentsParser: '@Track\Service\Csv\Parser\StudentsParser'
+      $meansBuilder: '@Track\Service\Csv\Builder\MeansBuilder'
+      $csvReader: '@Track\Service\Csv\CsvReaderInterface'
+      $csvWriter: '@Track\Service\Csv\CsvWriterInterface'

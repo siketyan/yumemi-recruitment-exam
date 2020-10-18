@@ -1,0 +1,8 @@
+services:
+  Track\UseCase\DropoutsUseCase:
+    arguments:
+      $dropoutResolver: '@Track\Service\Dropout\DropoutResolver'
+
+  Track\UseCase\TopVsBottomUseCase:
+    arguments:
+      $meanCalculator: '@Track\Service\Mean\MeanCalculator'
